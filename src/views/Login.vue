@@ -94,11 +94,11 @@
     methods: {
       login(){
         let parseObj = JSON.parse(JSON.stringify(this.userMockado));
-        
+
         if (this.input.email != '' && this.input.senha != '') {
           if(this.input.email == parseObj.email && this.input.senha == parseObj.senha) {
               this.$emit("autenticado", true);
-              this.$router.replace({ name: "About" });
+              this.$router.replace({ name: "Dashboard" });
               this.valid = true;
           } else {
               alert("O e-mail e/ou senha está incorreto");

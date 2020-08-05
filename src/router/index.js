@@ -16,15 +16,10 @@ Vue.use(VueRouter)
         name: "login",
         component: Login
     },
-    // {
-    //     path: "/secure",
-    //     name: "secure",
-    //     component: SecureComponent
-    // },
     {
-      path: '/about',
-      name: 'About',
-      component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: () => import(/* webpackChunkName: "about" */ '../views/Dashboard.vue')
     }
 ]
 
