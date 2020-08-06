@@ -44,7 +44,15 @@
           justify="center"
         >
           <v-col cols="6">
-            <vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions" :useCustomSlot=true>
+            <vue-dropzone 
+              ref="myVueDropzone"
+              id="dropzone"
+              :options="dropzoneOptions"
+              :useCustomSlot=true
+              v-on:vdropzone-success="uploadSuccess"
+              v-on:vdropzone-error="uploadError"
+              v-on:vdropzone-removed-file="fileRemoved"
+            >
               <div class="dropzone-custom-content">
                 <h3 class="dropzone-custom-title">Arraste e solte seu arquivo aqui!</h3>
                 <div class="subtitle">...ou clique para selecionar um arquivo do seu computador.</div>
@@ -52,6 +60,13 @@
             </vue-dropzone>
           </v-col>
         </v-row>
+
+        <div v-if="uploadedFiles.length">
+          <div v-for="file in uploadedFiles" :key="file.name">
+            <a :href="file.link" download="file.pdf">{{file.name}}</a>
+          </div>
+        </div>
+        
       </v-container>
     </v-main>
 
@@ -73,6 +88,9 @@
     },
     data: () => ({
       drawer: null,
+      fileName: '',
+      pdfFile:'',
+      uploadedFiles: [],
       dropzoneOptions: {
           url: 'https://httpbin.org/post',
           thumbnailWidth: 150,
@@ -84,6 +102,55 @@
     created () {
       this.$vuetify.theme.light = true
     },
+    methods: {
+      uploadSuccess(file, response) {
+          this.fileName = file.name;
+          console.log('Upload de arquivo concluído com sucesso. Nome do arquivo: ' + this.fileName);
+          const newFile = {
+            name: file.name,
+            link: response.files.file
+          }
+          this.uploadedFiles = [
+            newFile,
+            ...this.uploadedFiles,
+          ]
+      },
+      uploadError(file, message) {
+          console.log('Houve algum erro');
+      },
+      fileRemoved() {},
+
+      handleFileAdding(file){
+        this.pdfFile = file;
+      },
+
+      // getDataURL(){
+      //     var fileReader = new FileReader();
+      //     var base64;
+      //     console.log(this.base64);
+      //     fileReader.onload = (fileLoadedEvent) => {
+      //         base64 = fileLoadedEvent.target.result;
+      //         this.pdfFile.dataURL= base64;
+      //     };
+      //     fileReader.readAsDataURL(this.pdfFile);
+
+      //     // Checks every second for the dataURL.
+      //     var checkIfReady = setInterval(()=>{
+
+      //       // If there is it logs it.
+      //       if(fileReader.result){
+      //         console.log(fileReader.result)
+      //         // USE the DATAURL
+      //         clearInterval(checkIfReady);
+      //       }
+
+      //       // Stops checking after 10 seconds.
+      //       setTimeout(()=>{
+      //         clearInterval(checkIfReady);
+      //       }, 10000)
+      //     },1000);
+      //   }
+    }
   }
 </script>
 <style>
