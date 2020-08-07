@@ -24,11 +24,45 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+
+      <template v-slot:append>
+        <v-menu 
+          offset-y
+          v-if="uploadedFiles.length"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <div class="pa-2">
+              <v-btn block
+                color="primary"
+                dark
+                v-bind="attrs"
+                v-on="on"
+              >
+                Ver uploads
+              </v-btn>
+            </div>
+          </template>
+          <v-list>
+            <v-list-item
+              v-for="file in uploadedFiles" 
+              :key="file.name"
+              @click="close = !close"
+            >
+              <v-list-item-title>
+                <a class="upload-itens" :href="file.link" download="file.pdf">
+                  <v-icon class="pr-1">mdi-file-download</v-icon> 
+                  {{file.name}}
+                </a>
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </template>
     </v-navigation-drawer>
 
     <v-app-bar
-      app
       clipped-left
+      app
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Visualizador de pdf</v-toolbar-title>
@@ -60,13 +94,7 @@
             </vue-dropzone>
           </v-col>
         </v-row>
-
-        <div v-if="uploadedFiles.length">
-          <div v-for="file in uploadedFiles" :key="file.name">
-            <a :href="file.link" download="file.pdf">{{file.name}}</a>
-          </div>
-        </div>
-        
+  
       </v-container>
     </v-main>
 
@@ -79,6 +107,7 @@
 <script>
   import vue2Dropzone from 'vue2-dropzone';
   import 'vue2-dropzone/dist/vue2Dropzone.min.css';
+  
   export default {
     props: {
       source: String,
@@ -90,6 +119,7 @@
       drawer: null,
       fileName: '',
       pdfFile:'',
+      close: false,
       uploadedFiles: [],
       dropzoneOptions: {
           url: 'https://httpbin.org/post',
@@ -162,6 +192,9 @@
     text-align: center;
   }
 
+  .dropzone .dz-preview {
+    position: sticky;
+  }
   .dropzone-custom-title {
     margin-top: 0;
     color: #00b782;
@@ -169,5 +202,10 @@
 
   .subtitle {
     color: #314b5f;
+  }
+
+  .upload-itens{
+    text-decoration: none;
+    color: #003 !important;
   }
 </style>
