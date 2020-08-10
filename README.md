@@ -1,4 +1,6 @@
 # vue-dash
+Projeto desenvolvido com Vue.js, com uso de vuetify,vue-pdf, router e vue-dropzone.
+Consiste em uma dashboard para visualização de documentos pdf.
 
 ## Project setup
 ```
