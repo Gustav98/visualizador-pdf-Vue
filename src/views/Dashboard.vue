@@ -6,17 +6,18 @@
       clipped
     >
       <v-list dense>
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon>mdi-file-document</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>
-              <router-link to="/documento">Visualizar documento</router-link>
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
+        <router-link to="/documento">
+          <v-list-item link>
+            <v-list-item-action>
+              <v-icon>mdi-file-document</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>
+                Visualizar documento
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
       </v-list>
 
       <template v-slot:append>
@@ -171,7 +172,9 @@
   .subtitle {
     color: #314b5f;
   }
-
+  .v-application a{
+    text-decoration: none !important;
+  }
   .upload-itens{
     text-decoration: none;
     color: #003 !important;
