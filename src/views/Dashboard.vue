@@ -8,21 +8,15 @@
       <v-list dense>
         <v-list-item link>
           <v-list-item-action>
-            <v-icon>mdi-view-dashboard</v-icon>
+            <v-icon>mdi-file-document</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Dashboard</v-list-item-title>
+            <v-list-item-title>
+              <router-link to="/documento">Visualizar documento</router-link>
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon>mdi-cog</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Settings</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
       </v-list>
 
       <template v-slot:append>
@@ -154,32 +148,6 @@
         this.pdfFile = file;
       },
 
-      // getDataURL(){
-      //     var fileReader = new FileReader();
-      //     var base64;
-      //     console.log(this.base64);
-      //     fileReader.onload = (fileLoadedEvent) => {
-      //         base64 = fileLoadedEvent.target.result;
-      //         this.pdfFile.dataURL= base64;
-      //     };
-      //     fileReader.readAsDataURL(this.pdfFile);
-
-      //     // Checks every second for the dataURL.
-      //     var checkIfReady = setInterval(()=>{
-
-      //       // If there is it logs it.
-      //       if(fileReader.result){
-      //         console.log(fileReader.result)
-      //         // USE the DATAURL
-      //         clearInterval(checkIfReady);
-      //       }
-
-      //       // Stops checking after 10 seconds.
-      //       setTimeout(()=>{
-      //         clearInterval(checkIfReady);
-      //       }, 10000)
-      //     },1000);
-      //   }
     }
   }
 </script>

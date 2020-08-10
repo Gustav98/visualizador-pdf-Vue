@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
+import PDFDocumento from '../components/PDFDocumento'
 
 Vue.use(VueRouter)
 
@@ -17,10 +18,16 @@ Vue.use(VueRouter)
         component: Login
     },
     {
+      path: "/documento",
+      name: "PDFDocumento",
+      component: PDFDocumento
+    },
+    {
       path: '/dashboard',
       name: 'Dashboard',
       component: () => import(/* webpackChunkName: "about" */ '../views/Dashboard.vue')
-    }
+    },
+    
 ]
 
 const router = new VueRouter({

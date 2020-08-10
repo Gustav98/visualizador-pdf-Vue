@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <div id="app">
+      
       <div id="nav">
         <router-link v-if="autenticado" to="/" v-on:click.native="logout()" replace>Logout</router-link>
       </div>
